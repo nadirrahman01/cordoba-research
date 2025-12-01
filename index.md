@@ -31,3 +31,9 @@ title: Cordoba Capital Research
     {% endfor %}
   </div>
 </section>
+          <p class="post-card-summary">{{ post.summary }}</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>
