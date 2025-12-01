@@ -1,0 +1,50 @@
+name: Build site and generate DOCX
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby (for Jekyll)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+
+      - name: Install Jekyll
+        run: |
+          gem install jekyll
+
+      - name: Build Jekyll site
+        run: |
+          jekyll build -d _site
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Generate DOCX from posts
+        run: |
+          mkdir -p _site/docs
+          for f in $(find _posts -name "*.md"); do
+            base=$(basename "$f" .md)
+            pandoc "$f" \
+              --from=markdown \
+              --to=docx \
+              --reference-doc=docs_template/cordoba_template.docx \
+              -o "_site/docs/${base}.docx"
+          done
+
+      - name: Deploy to GitHub Pages (gh-pages branch)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _site
+          cname: research.cordobacapital.co.uk
