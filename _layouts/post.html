@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+<article>
+  <h2>{{ page.title }}</h2>
+  <p>By {{ page.author }} | {{ page.date | date: "%d %B %Y" }} | Category: {{ page.category }}</p>
+
+  <div>
+    {{ content }}
+  </div>
+
+  <hr>
+
+  {% assign slug = page.path | split: "/" | last | replace: ".md", "" %}
+  <p>
+    <a href="/docs/{{ slug }}.docx">Download Word document</a>
+  </p>
+</article>
