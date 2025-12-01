@@ -11,15 +11,28 @@
 
   <header class="site-header">
     <div class="site-header-inner">
-      <div class="site-logo">
-        <a href="{{ "https://cordobacapital.co.uk" }}">
-          Cordoba <span>Capital</span>
+      <div class="site-header-left">
+        <a href="https://cordobacapital.co.uk" class="brand-link">
+          <div class="brand-mark">C</div>
+          <div class="brand-text">
+            <span class="brand-name">Cordoba</span>
+            <span class="brand-sub">Capital</span>
+          </div>
         </a>
       </div>
-      <nav class="site-nav">
-        <a href="https://cordobacapital.co.uk">Main site</a>
-        <a href="{{ "/" | relative_url }}">Research Home</a>
+
+      <nav class="site-header-center">
+        <a href="https://cordobacapital.co.uk">Home</a>
+        <a href="https://cordobacapital.co.uk/about">About</a>
+        <a href="{{ "/" | relative_url }}">Insights</a>
+        <a href="https://cordobacapital.co.uk/newsroom">Newsroom</a>
       </nav>
+
+      <div class="site-header-right">
+        <a href="{{ "/publish.html" | relative_url }}" class="nav-cta">
+          Publish research
+        </a>
+      </div>
     </div>
   </header>
 
