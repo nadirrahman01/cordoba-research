@@ -33,13 +33,16 @@ jobs:
       - name: Generate DOCX from posts
         run: |
           mkdir -p _site/docs
-          for f in $(find _posts -name "*.md"); do
-            base=$(basename "$f" .md)
-            pandoc "$f" \
-              --from=markdown \
-              --to=docx \
-              --reference-doc=docs_template/cordoba_template.docx \
-              -o "_site/docs/${base}.docx"
+          for f in _posts/*.md; do
+            if [ -f "$f" ]; then
+              base=$(basename "$f" .md)
+              echo "Generating DOCX for $f -> _site/docs/${base}.docx"
+              pandoc "$f" \
+                --from=markdown \
+                --to=docx \
+                --reference-doc=docs_template/cordoba_template.docx \
+                -o "_site/docs/${base}.docx"
+            fi
           done
 
       - name: Deploy to GitHub Pages (gh-pages branch)
@@ -47,4 +50,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: _site
-          cname: research.cordobacapital.co.uk
