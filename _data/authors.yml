@@ -1,0 +1,12 @@
+nadir:
+  name: "Nadir Rahman"
+  role: "Founder"
+  bio: "Focused on macro, EM and bank risk, with previous experience at Fidelity Investments and other buy-side roles."
+  linkedin: "https://www.linkedin.com/in/nadirrahman/"
+  image: ""  # optional path if you ever add images
+
+tim:
+  name: "Tim Safin"
+  role: "Macro Research Analyst"
+  bio: "Covers Central Asia, labour markets and long-term demographic shifts."
+  linkedin: ""
