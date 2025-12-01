@@ -3,17 +3,22 @@ layout: default
 ---
 
 <article>
-  <h2>{{ page.title }}</h2>
-  <p>By {{ page.author }} | {{ page.date | date: "%d %B %Y" }} | Category: {{ page.category }}</p>
+  <header class="article-header">
+    <h1 class="article-title">{{ page.title }}</h1>
+    <div class="article-meta">
+      {{ page.category | upcase }} · {{ page.date | date: "%d %B %Y" }} · {{ page.author }}
+    </div>
+  </header>
 
-  <div>
+  <div class="article-body">
     {{ content }}
+
+    <div class="download-docx">
+      {% assign slug = page.path | split: "/" | last | replace: ".md", "" %}
+      <span>Need the formatted version?</span>
+      <a href="{{ "/docs/" | append: slug | append: ".docx" | relative_url }}">
+        Download Word document
+      </a>
+    </div>
   </div>
-
-  <hr>
-
-  {% assign slug = page.path | split: "/" | last | replace: ".md", "" %}
-  <p>
-    <a href="/docs/{{ slug }}.docx">Download Word document</a>
-  </p>
 </article>
