@@ -13,12 +13,14 @@ layout: default
   <div class="article-body">
     {{ content }}
 
-    <div class="download-docx">
-      {% assign slug = page.path | split: "/" | last | replace: ".md", "" %}
-      <span>Need the formatted version?</span>
-      <a href="{{ "/docs/" | append: slug | append: ".docx" | relative_url }}">
-        Download Word document
-      </a>
-    </div>
+{% assign base = page.path | split: "/" | last | replace: ".md", "" %}
+
+<div class="download-docx">
+  <span>Need the formatted version?</span>
+  <a href="{{ "/docs/" | append: base | append: ".docx" | relative_url }}">
+    Download Word document
+  </a>
+</div>
+
   </div>
 </article>
