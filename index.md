@@ -3,24 +3,49 @@ layout: default
 title: Cordoba Capital Research
 ---
 
-<div class="dashboard-header">
-  <div>
-    <div class="hero-eyebrow">Cordoba Capital</div>
-    <h1 class="hero-title">Research Dashboard</h1>
-    <p class="hero-subtitle">
-      Internal hub for Cordoba analysts and Visiting Research Analysts to publish and access notes
-      across macro, equities, fixed income, commodities, and credit.
-    </p>
+{% assign featured_post = site.posts | where_exp:"p","p.featured == true" | first %}
+{% if featured_post == nil %}
+  {% assign featured_post = site.posts | first %}
+{% endif %}
+
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Insight Highlight</div>
+    {% if featured_post %}
+      <h1 class="hero-title">{{ featured_post.title }}</h1>
+      {% if featured_post.summary %}
+        <p class="hero-subtitle">{{ featured_post.summary }}</p>
+      {% endif %}
+      <div class="hero-meta">
+        {{ featured_post.category | upcase }} ·
+        {{ featured_post.date | date: "%d %B %Y" }} ·
+        {% if featured_post.author_id %}
+          <a href="{{ "/authors/" | append: featured_post.author_id | append: ".html" | relative_url }}">
+            {{ featured_post.author }}
+          </a>
+        {% else %}
+          {{ featured_post.author }}
+        {% endif %}
+      </div>
+      <div class="hero-actions">
+        <a href="{{ featured_post.url | relative_url }}" class="hero-btn">
+          Read note
+        </a>
+      </div>
+    {% else %}
+      <h1 class="hero-title">Cordoba Capital Research</h1>
+      <p class="hero-subtitle">
+        A home for Cordoba analysts and Visiting Research Analysts to publish
+        notes across macro, equities, fixed income, commodities, and credit.
+      </p>
+    {% endif %}
   </div>
 
-  <div class="publish-wrapper">
-    <a class="publish-button"
-       href="https://github.com/nadirrahman01/cordoba-research/new/main/_posts"
-       target="_blank" rel="noopener">
-      + Publish research
-    </a>
+  <div class="hero-media">
+    <div class="hero-panel hero-panel-main"></div>
+    <div class="hero-panel hero-panel-secondary"></div>
   </div>
-</div>
+</section>
 
 <div class="dashboard-controls">
   <div class="search-wrapper">
